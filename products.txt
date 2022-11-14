@@ -1,0 +1,14 @@
+[
+  {
+    "title": "POROTOS ALUBIA",
+    "price": "30",
+    "thumbnail": "1668465044994-legumbresYHarinas.jpg",
+    "id": 1
+  },
+  {
+    "title": "ALMOHADITAS AVELLANA",
+    "price": "55",
+    "thumbnail": "1668465761984-cereales.jpg",
+    "id": 2
+  }
+]
