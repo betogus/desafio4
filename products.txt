@@ -10,5 +10,11 @@
     "price": "55",
     "thumbnail": "1668465761984-cereales.jpg",
     "id": 2
+  },
+  {
+    "title": "Perro",
+    "price": "12",
+    "thumbnail": "1673027151600-certificate-yqp-internet-la-web-y-la-programacion-zd3wlfx29r1y_page-0001.jpg",
+    "id": 3
   }
 ]
