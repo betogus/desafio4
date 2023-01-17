@@ -17,13 +17,12 @@ function onInit(){
 onInit() 
 
 app.use(express.json())
-app.use('/', express.static('public'))
+app.use('/dashboard', express.static('public'))
 app.use('/api/productos', productRouter)
 app.use('/api/productos-test', productTestRouter)
 
 const { Server} = require('socket.io')
-//const PORT = process.env.PORT || 8080
-//const server = app.listen(PORT, () => console.log('Server Up'))
+
 
 //HANDLEBARS
 const handlebars = require('express-handlebars')
@@ -44,6 +43,46 @@ io.on('connection', socket => {
     socket.emit('products', productos)   
 })
 
+//SESSION
+
+const session = require('express-session')
+const FileStore = require('session-file-store')
+const cookieParser = require('cookie-parser')
+
+const Store = FileStore(session)
+app.use(cookieParser())
+
+app.use(session({
+    store: new Store({
+        path: './session',
+        ttl: 36000,
+    }),
+    key: 'user_sid', 
+    secret: 'c0d3r',
+    resave: true,
+    saveUninitialized: true,
+}))
+
+const sessionChecker = (req, res, next) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.redirect('/dashboard')
+    } else {
+        next()
+    }
+}
+
+app.get('/', sessionChecker, (req, res) => {
+    res.redirect('./login')
+})
 
 
+app.route('/login').get(sessionChecker, (req, res) => {
+    res.sendFile(__dirname + '/public/login.html')
+}).post((req, res) => {
+    req.session.username = req.body.username
+    res.redirect('/dashboard')
+})
 
+app.get('/currentUser', (req, res) => {
+    res.send(req.session.username)
+})

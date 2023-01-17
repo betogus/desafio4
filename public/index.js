@@ -35,7 +35,6 @@ const tablaDeProductos = (productos) => {
 }
 
 socket.on('products', data => {
-    console.log(data)
     let tabla = tablaDeProductos(data)
     document.getElementById('table').innerHTML = tabla
 
