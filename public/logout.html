@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api de Coderhouse</title>
+</head>
+
+<body>
+    <div class="title-container">
+        <h1 id="title"></h1>
+        <div class='button' type="button"><a class="link" href="/login">Login</a></div>
+    </div>
+   <script>
+    fetch('/logoutUser')
+    .then(result =>result.json())
+    .then(json => {
+    document.getElementById('title').innerHTML = `Hasta pronto ${json.username}`
+    })
+   </script>
+
+    <style>
+
+        h1 {
+            color: blue;
+        }
+        .title-container {
+            width: 700px;
+            height: 50px;
+            background-color: rgb(183, 244, 189);
+            border-radius: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+
+        }
+        .button {
+            background-color: #f7c203;
+            border-width: 0ch;
+            border-radius: 0.2rem;
+            width: 100px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .link {
+            text-decoration: none;
+            color: #000000;
+        }
+    </style>
+</body>
+</html>

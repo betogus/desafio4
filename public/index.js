@@ -1,5 +1,4 @@
 const socket = io()
-console.log("Hola")
 const tablaDeProductos = (productos) => {
     let contenido = ""
     let contenidoSup = "";
@@ -22,7 +21,7 @@ const tablaDeProductos = (productos) => {
                 <tr>
                     <td>${producto.title}</td>
                     <td>${producto.price}</td>
-                    <td><img src=${producto.thumbnail} class="foto"></td>
+                    <td><img src="./uploads/${producto.thumbnail}" class="foto"></td>
                 </tr>
           `
         })
@@ -34,9 +33,17 @@ const tablaDeProductos = (productos) => {
     return contenido
 }
 
+let productos
 socket.on('products', data => {
     let tabla = tablaDeProductos(data)
     document.getElementById('table').innerHTML = tabla
-
 })
+
+fetch('/currentUser')
+.then(result =>result.json())
+.then(json => {
+    document.getElementById('title').innerHTML = `Bienvenido ${json.username}`
+})
+
+     
 

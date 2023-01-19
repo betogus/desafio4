@@ -17,31 +17,24 @@ function onInit(){
 onInit() 
 
 app.use(express.json())
-app.use('/dashboard', express.static('public'))
 app.use('/api/productos', productRouter)
 app.use('/api/productos-test', productTestRouter)
-
+app.use(express.urlencoded({extended: true}))
 const { Server} = require('socket.io')
 
 
 //HANDLEBARS
-const handlebars = require('express-handlebars')
+/* const handlebars = require('express-handlebars')
 app.engine('handlebars', handlebars.engine())
-app.set('views', './public/views/handlebars')
+app.set('views', './public/views/handlebars') */
 
-app.set('view engine', 'handlebars')
+/* app.set('view engine', 'handlebars') */
 const io = new Server(server)
 
 const Api = require('./src/api')
 const api = new Api()
-const file = './productsTest.txt'
+const file = './products.txt'
 
-
-let productos = api.getAllProducts(file)
-io.on('connection', socket => {
-    console.log('Socket connected!')
-    socket.emit('products', productos)   
-})
 
 //SESSION
 
@@ -53,36 +46,80 @@ const Store = FileStore(session)
 app.use(cookieParser())
 
 app.use(session({
-    store: new Store({
+    /* store: new Store({
         path: './session',
-        ttl: 36000,
-    }),
+        ttl: 60,
+    }), */
+    cookie: {maxAge: 60000},
     key: 'user_sid', 
     secret: 'c0d3r',
     resave: true,
     saveUninitialized: true,
 }))
+app.use(express.static('public'))
 
-const sessionChecker = (req, res, next) => {
-    if (req.session.user && req.cookies.user_sid) {
-        res.redirect('/dashboard')
-    } else {
-        next()
-    }
-}
 
-app.get('/', sessionChecker, (req, res) => {
+app.get('/', (req, res) => {
     res.redirect('./login')
 })
 
 
-app.route('/login').get(sessionChecker, (req, res) => {
-    res.sendFile(__dirname + '/public/login.html')
+app.route('/login').get((req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.redirect('/dashboard')
+    } else {
+        res.sendFile(__dirname + '/public/login.html')
+    } 
 }).post((req, res) => {
-    req.session.username = req.body.username
+    req.session.user = {
+        username : req.body.username
+    }
+    req.session.save()
     res.redirect('/dashboard')
 })
 
-app.get('/currentUser', (req, res) => {
-    res.send(req.session.username)
+app.get('/dashboard', (req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.sendFile(__dirname + '/public/dashboard.html')
+    } else {
+        res.redirect('/login')
+    }
 })
+
+app.get('/logout', (req, res) => {
+     if (req.session.user && req.cookies.user_sid) {
+         res.sendFile(__dirname + '/public/logout.html')
+     } else {
+         res.redirect('/login')
+     }
+})
+
+
+app.get('/currentUser', (req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        let {username } = req.session.user
+        res.send({username})
+    } else {
+        res.redirect('/login')
+    }
+
+})
+
+
+app.get('/logoutUser', (req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        let { username } = req.session.user
+        res.send({username})
+        req.session.destroy()
+        res.clearCookie("user_sid");
+    } else {
+         res.redirect('/login')
+    }  
+})
+
+io.on('connection', socket => {
+    let productos = api.getAllProducts(file)
+    console.log('Socket connected!')
+    socket.emit('products', productos)  
+})
+

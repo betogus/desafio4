@@ -51,7 +51,8 @@ const validPost = (req, res, next) => {
     let producto = req.body
     producto.thumbnail = req.file.filename
     api.createProduct(producto, file)
-    res.send({message: 'Se añadio con exito', producto})
+    res.redirect('/dashboard')
+
 }) 
 
 router.put('/:id', (req, res) => {

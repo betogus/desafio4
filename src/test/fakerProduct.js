@@ -1,4 +1,4 @@
-const express = require('express')
+/* const express = require('express')
 const router = express.Router()
 const Api = require('../api')
 const multer = require('multer')
@@ -55,4 +55,4 @@ router.delete('/:id', (req, res) => {
     api.deleteProduct(id,file)
     res.send({message: "producto eliminado"})
 })
-module.exports = router
+module.exports = router */

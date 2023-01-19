@@ -1,5 +1,4 @@
 const fs = require('fs')
-const file = '.\assets\productos.txt'
  
  class Api {
    constructor(){}
@@ -55,7 +54,6 @@ const file = '.\assets\productos.txt'
         //agregamos el producto al archivo
         let id = productos.length+1;
         producto.id = id
-        console.log(productos)
         productos.push(producto)
         //reescribimos el archivo txt
         productos = JSON.stringify((productos),null,2)

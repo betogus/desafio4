@@ -1,20 +1,20 @@
 [
   {
-    "title": "POROTOS ALUBIA",
-    "price": "30",
-    "thumbnail": "1668465044994-legumbresYHarinas.jpg",
+    "title": "asd",
+    "price": "234",
+    "thumbnail": "1673999929511-adaptive-icon.png",
     "id": 1
   },
   {
-    "title": "ALMOHADITAS AVELLANA",
-    "price": "55",
-    "thumbnail": "1668465761984-cereales.jpg",
+    "title": "silla",
+    "price": "234",
+    "thumbnail": "1674045531501-favicon.png",
     "id": 2
   },
   {
-    "title": "Perro",
-    "price": "12",
-    "thumbnail": "1673027151600-certificate-yqp-internet-la-web-y-la-programacion-zd3wlfx29r1y_page-0001.jpg",
+    "title": "sad",
+    "price": "234",
+    "thumbnail": "1674148614746-icon.png",
     "id": 3
   }
 ]
