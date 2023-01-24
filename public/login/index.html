@@ -9,22 +9,31 @@
 <body class="body">
     <div class="container">
         <h1>Login de Usuario</h1>
-        <form autocomplete="off" action="/login" method="post">
+        <form autocomplete="off" action="/login" id='loginForm' method="post">
             <div class="form-group">
                 <label><i><b>Ingrese su nombre:</b></i></label></br>
                 <input class="form-control" required type="text" name="username" />
             </div>
             <div class="form-group">
-                <input class="btn btn-primary" type="submit" value="Enviar" />
+                <label><i><b>Ingrese su contraseña:</b></i></label></br>
+                <input class="form-control" required type="password" name="password" />
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary" id="loginBtn" type="submit" value="Enviar" />
             </div>
         </form>
+        <button id="registerBtn" class="btn" >Registrarse</button>
     </div>
+    <script src="index.js"></script>
     <style>
         .container {
             background-color: #c5c3c3;
             width: 800px;
             padding: 10px;
-            height: 200px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
         }
         .body {
@@ -41,11 +50,19 @@
             border-width: 0ch;
             border-radius: 0.2rem;
             color: #fff;
-            width: 70px;
+            width: 80px;
             height: 30px;
+            padding: 5px;
         }
         h1 {
             color: blue;
+        }
+        #loginForm {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
         }
     </style>
 </body>

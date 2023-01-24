@@ -1,6 +1,6 @@
-const fs = require('fs')
+import fs from 'fs'
  
- class Api {
+export class Api {
    constructor(){}
 
     getAllProducts(file){
@@ -83,4 +83,3 @@ const fs = require('fs')
 
 }
 
-module.exports = Api

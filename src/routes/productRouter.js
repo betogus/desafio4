@@ -1,7 +1,7 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
-const Api = require('../api')
-const multer = require('multer')
+import {Api} from '../api.js'
+import multer from 'multer'
 const api = new Api()
 const file = './products.txt'
 
@@ -68,4 +68,5 @@ router.delete('/:id', (req, res) => {
     api.deleteProduct(id,file)
     res.send({message: "producto eliminado"})
 })
-module.exports = router
+
+export default router

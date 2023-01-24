@@ -16,5 +16,11 @@
     "price": "234",
     "thumbnail": "1674148614746-icon.png",
     "id": 3
+  },
+  {
+    "title": "qwe",
+    "price": "2342",
+    "thumbnail": "1674565876303-splash (1).png",
+    "id": 4
   }
 ]

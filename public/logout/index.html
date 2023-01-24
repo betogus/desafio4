@@ -13,13 +13,7 @@
         <h1 id="title"></h1>
         <div class='button' type="button"><a class="link" href="/login">Login</a></div>
     </div>
-   <script>
-    fetch('/logoutUser')
-    .then(result =>result.json())
-    .then(json => {
-    document.getElementById('title').innerHTML = `Hasta pronto ${json.username}`
-    })
-   </script>
+   <script src="index.js"></script>
 
     <style>
 
