@@ -12,7 +12,8 @@ btn.addEventListener('click', evt => {
             'Content-Type': "application/json"
         }
     }).then(response => {
-           
+           if (response.status === 200) location.replace('/dashboard')
+           else if (response.status === 401) location.replace('/faillogin')
     }); 
 })
 

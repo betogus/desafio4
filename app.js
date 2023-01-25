@@ -1,6 +1,5 @@
 import express from 'express'
 import productRouter from './src/routes/productRouter.js'
-import path from 'path'
 import { initializePassport } from './src/passport.config.js'
 import passport from 'passport'
 import mongoose from 'mongoose'
@@ -68,39 +67,48 @@ app.post('/register', passport.authenticate('register', {
     })
 })
 
-app.post('/failedRegister', (req, res) => {
+app.post('/failregister', (req, res) => {
     res.send({
         error: 'I cannot authenticate you'
     })
 })
 
-app.get('/currentUser', passport.authenticate('login', {
-    failureRedirect: '/login'
-}), (req, res) => {
-    res.redirect('/dashboard');
+app.get('/currentUser', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.json(req.user)
+    } 
 });
 
 app.get('/auth', (req, res) => {
     if (req.isAuthenticated()) {
         res.status(200).send({message: 'logged in'})
     } else {
-        res.status(401).send({message: 'not authorizade'})
-    }
+        res.status(401).send({message: 'not authorizaded'})
+    } 
     
 })
 
-app.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), (req, res) => {
+
+app.post('/login', passport.authenticate('login'), (req, res) => {
     if (req.isAuthenticated()) {
-        res.redirect('/dashboard');
+        res.status(200).send({message: 'logged in'})
     } else {
-        res.redirect('/faillogin');
+        res.status(401).send({message: 'not athorizaded'});
     }
 });
 
 
+app.get('/logout',  (req, res) => { 
+         req.logout(function  (err) {
+            if (err) {
+                 return res.send('error de deslogueo')
+            }
+             res.status(200).send({
+                message: 'logged out'
+            })
+        })
 
-app.get('/logout', (req, res) => {
-    req.logout()
+     
 })
 
 

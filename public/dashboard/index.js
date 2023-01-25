@@ -40,15 +40,25 @@ socket.on('products', data => {
 })
 
 
-let btn = document.getElementById('logoutBtn')
-btn.addEventListener('click', evt => {
-    evt.preventDefault()
-    location.replace('/logout')
+
+fetch('/auth').then(response => {
+    if (response.status === 401) location.replace('/login')
 })
 
-/* fetch('/auth').then(result => {
-    if (result.status === 200) location.replace('/dashboard')
-    else if (result.status === 401) location.replace('/login')
-}) */
-     
 
+fetch('/currentUser', {
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+
+        document.getElementById('title').innerHTML = `Bienvenido ${data.username}`
+    });
+
+ let logoutBtn = document.getElementById('logoutBtn').addEventListener('click', (e) => {
+     e.preventDefault()
+     fetch('/logout').then(response => {
+         if (response.status === 200) location.replace('/logout')
+     })
+ })

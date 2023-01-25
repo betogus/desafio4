@@ -1,5 +1,4 @@
-fetch('/auth').then(result => {
-    console.log(result)
-   if (result.status ===401) location.replace('/login')
-   else location.replace('/dashboard')
+fetch('/auth').then(response => {
+   if (response.status === 200) location.replace('/dashboard')
+   else if (response.status === 401) location.replace('/login')
 })
