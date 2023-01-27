@@ -1,0 +1,14 @@
+<h1>INFO</h1>
+<div>
+    <p>Argumentos de entrada: {{info.argumentosDeEntrada}}</p>
+    <p>Plataforma: {{info.plataforma}}</p>
+    <p>Versión de Node JS: {{info.versionNodeJs}}</p>
+    <p>Memoria Usada:</p>
+    {{#each info.memoriaUsada}}
+    <p class="indent">{{@key}}: {{this}}</p>
+    {{/each}}
+    <p>Path de Ejecución: {{info.pathDeEjecucion}}</p>
+    <p>Id del proceso: {{info.processId}}</p>
+    <p>Carpeta del proyecto: {{info.carpetaDelProyecto}}</p>
+</div>
+

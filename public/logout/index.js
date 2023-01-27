@@ -16,5 +16,8 @@ fetch('/currentUser', {
    
  let loginBtn = document.getElementById('loginBtn').addEventListener('click', (e) => {
      e.preventDefault()
-     location.replace('/login')
+     fetch('/logout').then(response => {
+        console.log(response.status)
+     })
+
  })

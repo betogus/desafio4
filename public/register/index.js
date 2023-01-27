@@ -11,15 +11,10 @@ btn.addEventListener('click', evt => {
             headers: {
                 'Content-Type': "application/json"
             }
-        }).then(result => result.json())
-
-        .then(json => {
-            if (json.error) {
-                location.replace('../failregister')
-            } else {
-                location.replace('../')
-            }
-        })
+        }).then(response => {
+            if (response.status === 200) location.replace('/dashboard')
+            else if (response.status === 401) location.replace('/failregister')
+        });
 })
 
 let loginBtn = document.getElementById('loginBtn')

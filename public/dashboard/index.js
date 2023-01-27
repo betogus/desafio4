@@ -1,3 +1,4 @@
+
 const socket = io()
 const tablaDeProductos = (productos) => {
     let contenido = ""
@@ -56,9 +57,9 @@ fetch('/currentUser', {
         document.getElementById('title').innerHTML = `Bienvenido ${data.username}`
     });
 
- let logoutBtn = document.getElementById('logoutBtn').addEventListener('click', (e) => {
+ document.getElementById('logoutBtn').addEventListener('click', (e) => {
      e.preventDefault()
-     fetch('/logout').then(response => {
-         if (response.status === 200) location.replace('/logout')
-     })
+     fetch('/logout')
+    location.replace('/logout')
+
  })
