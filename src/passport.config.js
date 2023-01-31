@@ -10,7 +10,7 @@ export const initializePassport = () => {
     passport.use(
         'register',
         new LocalStrategy({
-                passReqToCallback: true
+                passReqToCallback: true,
             },
             async (req, username, password, done) => {
                 try {
@@ -35,21 +35,13 @@ export const initializePassport = () => {
             }
         )
     )
-    passport.serializeUser((user, done) => {
-        done(null, user._id)
-    })
-    passport.deserializeUser((id, done) => {
-        users.findById(id, done)
-    })
 
     passport.use(
         'login',
         new LocalStrategy(
             async (username, password, done) => {
                 try {
-                    let user = await users.findOne({
-                        username
-                    })
+                    let user = await users.findOne({ username })
                     if (!user) return done(null, false)
                     if (!isValid(user, password)) return done(null, false)
                     return done(null, user)
@@ -59,5 +51,12 @@ export const initializePassport = () => {
             }
         )
     )
+
+    passport.serializeUser((user, done) => {
+        done(null, user._id)
+    })
+    passport.deserializeUser((id, done) => {
+        users.findById(id, done) 
+    })
 }
 

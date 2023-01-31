@@ -1,38 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
-
 <body class="body">
     <div class="container">
-        <h1>Registro Usuario</h1>
-        <form autocomplete="off" action="/register" role="form" id='registerForm' method="post">
+        <h1>Login de Usuario</h1>
+        <form autocomplete="off" action="/login" id='loginForm' method="post">
             <div class="form-group">
                 <label><i><b>Ingrese su nombre:</b></i></label></br>
                 <input class="form-control" required type="text" name="username" />
-            </div>
-            <div class="form-group">
-                <label><i><b>Ingrese su email:</b></i></label></br>
-                <input class="form-control" required type="email" name="email" />
             </div>
             <div class="form-group">
                 <label><i><b>Ingrese su contraseña:</b></i></label></br>
                 <input class="form-control" required type="password" name="password" />
             </div>
             <div class="form-group">
-                <input class="btn btn-primary" id="registerBtn" type="submit" value="Enviar" />
+                <input class="btn btn-primary" id="loginBtn" type="submit" value="Enviar" />
             </div>
         </form>
-        <button id="loginBtn" class="btn" onclick="location.href = '/login'">Loguearse</button>
+        <button id="registerBtn" class="btn" >Registrarse</button>
     </div>
-    
     <style>
-         .container {
+        .container {
             background-color: #c5c3c3;
             width: 800px;
             padding: 10px;
@@ -63,7 +56,7 @@
         h1 {
             color: blue;
         }
-        #registerForm {
+        #loginForm {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -72,5 +65,4 @@
         }
     </style>
 </body>
-
 </html>

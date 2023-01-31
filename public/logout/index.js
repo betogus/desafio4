@@ -1,8 +1,4 @@
 
-fetch('/auth').then(result => {
-    if (result.status === 401) location.replace('/login')
-})
-
 fetch('/currentUser', {
         method: 'GET',
         credentials: 'include'
@@ -16,8 +12,6 @@ fetch('/currentUser', {
    
  let loginBtn = document.getElementById('loginBtn').addEventListener('click', (e) => {
      e.preventDefault()
-     fetch('/logout').then(response => {
-        console.log(response.status)
-     })
+     fetch('/logout').then(()=>location.replace('/login'))
 
  })
