@@ -9,7 +9,7 @@
 <body>
     <div class="title-container">
         <h1 id="title">Bienvenido {{{name}}}</h1>
-        <button class='button' id="logoutBtn" >Desloguear</button>
+        <a id="link" href='/logout'><button class='button' id="logoutBtn">Desloguear</button></a>
     </div>
     <h2>Productos</h2>
     <h2>Ingresa un producto</h2>
@@ -26,7 +26,7 @@
         <p>No se encontraron productos</p>
     </div>
 <script src="/socket.io/socket.io.js"></script>
-<script src="../../dashboard/index.js"></script>
+<script src="../../index.js"></script>
 
 <style>
     .table {
@@ -72,7 +72,7 @@
         font-style: italic;
     }
     .title-container {
-        width: 700px;
+        width: 500px;
         height: 50px;
         background-color: rgb(183, 244, 189);
         border-radius: 0.5rem;
@@ -96,6 +96,7 @@
         text-decoration: none;
         color: #000000;
     }
+    
 </style>
    
     

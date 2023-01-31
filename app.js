@@ -134,12 +134,12 @@ app.get("/dashboard", isAuth, async (req, res) => {
 
 // LOGOUT
 
-app.get('/logout', async (req, res) => {
+app.get('/logout', isAuth, async (req, res) => {
     const userId = req.session.passport.user;
     try {
         const user = await users.findById(userId);
         res.render('logout', {
-            user
+            name: user.username
         });
 
     } catch (err) {
@@ -147,12 +147,26 @@ app.get('/logout', async (req, res) => {
             error: err
         });
     }
-    req.logout();
-    req.session.destroy()
-    res.clearCookie('connect.sid')
-    res.redirect('/')
 });
 
+app.get('/clearCookie',  (req, res) => {
+    req.logout(err => {
+        if (err) {
+            return res.status(500).json({
+                error: err
+            });
+        }
+        req.session.destroy(err => {
+            if (err) {
+                return res.status(500).json({
+                    error: err
+                });
+            }
+            res.clearCookie('connect.sid');
+            res.redirect('/');
+        });
+    });
+});
 
 // INICIO
 
