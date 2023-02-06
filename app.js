@@ -12,27 +12,48 @@ import argv  from './yargs.cjs'
 import { Server} from 'socket.io'
 import {Api} from './src/api.js'
 import { users } from './src/models/User.js'
-
+import cluster from 'cluster'
+import os from 'os'
 /* --------------------- SERVER --------------------------- */
-
 const app = express()
-dotenv.config()
-let server;
-let PORT = argv?.title != undefined? argv.title : 8080
-function onInit() {
-    console.log("Iniciando el servidor")
-    try {
-        server = app.listen(PORT, () => console.log('Server Up'))
-    } catch (error) {
-        console.log("Error de conexion con el servidor...", error)
+
+const NUM_CPUS = os.cpus().length
+if (cluster.isPrimary) {
+    console.log(`Proceso principal ${process.pid} está corriendo`)
+    for (let i = 0; i < NUM_CPUS; i++) {
+        cluster.fork()
+    }
+
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`Proceso ${worker.process.pid} murió`)
+    })
+} else {
+    
+    if (process.pid % 3 === 0) {
+        // Redirige las solicitudes a la ruta /api/randoms al puerto 8081
+        
+        app.listen(8081, () => {
+            console.log(`Worker ${process.pid} is listening on port 8081`)
+        })
+    } else {
+        // Redirige las solicitudes restantes al puerto 8080
+        app.listen(8080, () => {
+            console.log(`Worker ${process.pid} is listening on port 8080`)
+        })
     }
 }
-onInit()
+
+app.use('/api/randoms', randomRouter)
 app.use(express.static('public'))
 app.use(express.json())
 app.use('/api/productos', productRouter)
-app.use('/api/randoms', randomRouter)
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({
+    extended: true
+}))
+dotenv.config()
+let server;
+
+
 
 mongoose.set('strictQuery', true);
 const io = new Server(server)
@@ -174,6 +195,9 @@ app.get('/', isAuth, (req, res) => {
     res.redirect('/dashboard')
 });
 
+
+// INFO 
+
 app.get('/info', (req, res) => {
     let info = {
         argumentosDeEntrada: process.argv[3]?.slice(8) || "nulo",
@@ -182,7 +206,8 @@ app.get('/info', (req, res) => {
         memoriaUsada: process.memoryUsage(),
         pathDeEjecucion: process.execPath,
         processId: process.pid,
-        carpetaDelProyecto: process.cwd()
+        carpetaDelProyecto: process.cwd(),
+        cantidadDeProcesos: os.cpus().length
     }
     res.render('info', {
         info
@@ -190,9 +215,12 @@ app.get('/info', (req, res) => {
 })
 
 
+
+
 io.on('connection', socket => {
     let productos = api.getAllProducts(file)
     console.log('Socket connected!')
     socket.emit('products', productos)  
 })
+
 

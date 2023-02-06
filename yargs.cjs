@@ -1,29 +1,31 @@
-const yargs = require('yargs')
+const yargs = require('yargs');
+const argv = yargs
+    .option('port', {
+        alias: 'p',
+        describe: 'Puerto en el que se iniciará la aplicación',
+        type: 'number',
+        default: 8080
+    })
+    .option('modo', {
+        alias: 'm',
+        describe: 'Modo de inicio de la aplicación',
+        type: 'string',
+        choices: ['fork', 'cluster'],
+        default: 'fork'
+    })
+    .argv;
 
-//Create port command
-yargs.command({
-    command: 'port',
-    describe: 'Write a port',
-    builder: {
-        title: {
-            describe: 'port',
-            demandOption: false,
-            type: 'number'
-        }
-    },
-    handler: function (argv) {
-        if (argv === undefined) return 8080
-        if (isNaN(argv.title)) {
-            console.log('No se admiten strings')
-            process.exit(1)
-        } 
-        if (!Number.isInteger(argv.title)) {
-            console.log("Debe ser un número entero")
-            process.exit(1)
-        }
-        return argv.title
-    }
-})
-const argv = yargs.parse()
+if (argv.modo === 'fork') {
+    console.log('Iniciando en modo fork...');
+} else if (argv.modo === 'cluster') {
+    console.log('Iniciando en modo cluster...');
+} else {
+    console.error('Error: debes proporcionar una opción válida. Las opciones disponibles son "fork" y "cluster".');
+    process.exit(1);
+}
+
+console.log(`Puerto: ${argv.port}`);
+
+yargs.parse()
 
 module.exports = argv
