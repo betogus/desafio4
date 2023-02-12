@@ -1,4 +1,6 @@
 const yargs = require('yargs');
+let PORT;
+let MODO;
 const argv = yargs
     .option('port', {
         alias: 'p',
@@ -15,17 +17,17 @@ const argv = yargs
     })
     .argv;
 
-if (argv.modo === 'fork') {
-    console.log('Iniciando en modo fork...');
-} else if (argv.modo === 'cluster') {
+if (argv.modo === 'cluster') {
     console.log('Iniciando en modo cluster...');
+    MODO = "cluster"
 } else {
-    console.error('Error: debes proporcionar una opción válida. Las opciones disponibles son "fork" y "cluster".');
-    process.exit(1);
+    console.log('Iniciando en modo fork...')
+    MODO = 'fork'
 }
 
+PORT = argv.port
 console.log(`Puerto: ${argv.port}`);
 
 yargs.parse()
 
-module.exports = argv
+module.exports = {PORT, MODO}
