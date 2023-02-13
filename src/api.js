@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { logger } from './winston/winston.js';
  
 export class Api {
    constructor(){}
@@ -9,7 +10,7 @@ export class Api {
         let data = fs.readFileSync(file, 'utf8');
         productos = data.length > 0 ? JSON.parse(data) : [] ; 
        } catch(err) {
-        console.log('Error en la lectura del archivo', err)
+        logger.error('Error en la lectura del archivo', err)
        }
        return productos
     }
@@ -20,7 +21,7 @@ export class Api {
         let data = fs.readFileSync(file, 'utf8');
         productos = data.length > 0 ? JSON.parse(data) : []; 
        } catch(err) {
-        console.log('Error en la lectura del archivo', err)
+        logger.error('Error en la lectura del archivo', err)
        }
        return productos.find(producto => producto.id === parseInt(id))
        
@@ -36,7 +37,7 @@ export class Api {
             productos = JSON.stringify((productos),null,2)
             fs.writeFileSync(file, productos)
         } catch(err) {
-            console.log('Error en la lectura del archivo', err)
+            logger.error('Error en la lectura del archivo', err)
         }
       
 
@@ -49,7 +50,7 @@ export class Api {
         let data = fs.readFileSync(file, 'utf8');
         productos = data.length > 0 ? JSON.parse(data) : [] ;
        } catch(err) {
-        console.log('Error en la lectura del archivo', err)
+        logger.error('Error en la lectura del archivo', err)
        }
         //agregamos el producto al archivo
         let id = productos.length+1;
@@ -61,7 +62,7 @@ export class Api {
             fs.writeFileSync(file, productos)
             console.log({message: "se añadio con exito", productos})
         } catch(err){
-            console.log('Error en la escritura',err)
+            logger.error('Error en la escritura',err)
         }
        
 
@@ -76,7 +77,7 @@ export class Api {
             productos = JSON.stringify((productos),null,2)
             fs.writeFileSync(file, productos)
         } catch(err) {
-            console.log('Error en la lectura del archivo', err)
+            logger.error('Error en la lectura del archivo', err)
         }
       
     }
