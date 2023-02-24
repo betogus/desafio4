@@ -19,7 +19,7 @@ import { logger } from './src/winston/winston.js'
 
 /* --------------------- SERVER --------------------------- */
 const app = express()
-
+let server;
 const NUM_CPUS = os.cpus().length
 let puerto = PORT || 8080;
 if (MODO === "cluster" && cluster.isPrimary) {
@@ -31,7 +31,7 @@ if (MODO === "cluster" && cluster.isPrimary) {
         console.log(`Proceso ${worker.process.pid} murió`)
     })
 } else {
-    app.listen(puerto, () => {
+    server = app.listen(puerto, () => {
         console.log(`Iniciando servidor en puerto ${puerto}`)
     })
 
@@ -44,14 +44,11 @@ if (MODO === "cluster" && cluster.isPrimary) {
     }))
     app.use(compression())
     dotenv.config()
-    let server;
 
 
 
     mongoose.set('strictQuery', true);
-    const io = new Server(server)
-
-    const api = new Api()
+    
     const file = './products.txt'
 
     app.engine('handlebars', handlebars.engine())
@@ -89,11 +86,6 @@ if (MODO === "cluster" && cluster.isPrimary) {
     }
 
     /* --------------------- ROUTES --------------------------- */
-
-
- 
-
-  
 
     //REGISTER
 
@@ -222,12 +214,15 @@ if (MODO === "cluster" && cluster.isPrimary) {
         })
     })
 
+    const io = new Server(server)
 
+    const api = new Api()
     io.on('connection', socket => {
         let productos = api.getAllProducts(file)
         console.log('Socket connected!')
-        socket.emit('products', productos)  
+        socket.emit('products', productos)
     })
+    
 
     //RUTAS NO DEFINIDAS
 

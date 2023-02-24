@@ -52,5 +52,11 @@
     "price": "34324",
     "thumbnail": "1676301392386-mielesYEndulzantes.jpg",
     "id": 9
+  },
+  {
+    "title": "sdfdsfd",
+    "price": "324234",
+    "thumbnail": "1677250123127-20230205_174846.jpg",
+    "id": 10
   }
 ]

@@ -1,5 +1,6 @@
 
-const socket = io()
+
+const socket = io();
 const tablaDeProductos = (productos) => {
     let contenido = ""
     let contenidoSup = "";
@@ -45,4 +46,4 @@ let loginBtn = document.getElementById('loginBtn').addEventListener('click', (e)
     fetch('/logout').then(() => location.replace('/login'))
 })
 
-
+console.log("Hola")
