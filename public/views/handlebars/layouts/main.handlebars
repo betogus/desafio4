@@ -1,25 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Handlebars</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
+
 <body>
-    <div id="container">
-        {{{body}}}    
-    </div>
+    <nav class="header-nav">
+        <ul class="header-nav-container">
+            <li class="header-nav-item"><a href="/products">Productos</a></li>
+            <li class="header-nav-item"><a href="/user">Mis datos</a></li>
+            <li class="header-nav-item"><a href="/cart">Carrito</a></li>
+            <li class="header-nav-item"><a href='/logout'>Desloguearse</a></li>
+        </ul>
+    </nav>
+    <main>
+        {{{body}}}
+    </main>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+</body>
 </html>
 
 <style>
     body {
+
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-    #container {
+    main {
         width: 500px;
         padding: 50px 30px;
         background: lightblue;
@@ -28,16 +43,43 @@
         justify-content: center;
         align-items: center;
     }
+
     .indent {
         margin-left: 30px;
     }
+
     .random {
         width: 400px;
-        overflow-wrap:break-word;
+        overflow-wrap: break-word;
         overflow-y: scroll;
         height: 300px;
     }
+
     .random-text {
         font-size: 20px;
+    }
+
+    .header-nav-item {
+        list-style: none;
+    }
+
+    .header-nav-item a {
+        text-decoration: none;
+
+    }
+
+    .header-nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 40px;
+        border-bottom-right-radius: 2rem;
+        border-bottom-left-radius: 2rem;
+        background-color: aquamarine;
+    }
+
+    .header-nav-container {
+        display: flex;
+        justify-content: space-evenly;
     }
 </style>

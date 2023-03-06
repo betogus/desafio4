@@ -11,11 +11,27 @@
 <body class="body">
     <div class="container">
         <h1>Registro Usuario</h1>
-        <form autocomplete="off" action="/register" role="form" id='registerForm' method="post">
+        <form autocomplete="off" action="/register" role="form" id='registerForm' method="post" enctype="multipart/form-data" >
             <div class="form-group">
                 <label><i><b>Ingrese su nombre:</b></i></label></br>
                 <input class="form-control" required type="text" name="username" />
             </div>
+            <div class="form-group">
+                <label><i><b>Ingrese su dirección:</b></i></label></br>
+                <input class="form-control" required type="text" name="address" />
+            </div>
+            <div class="form-group">
+                <label><i><b>Ingrese su edad:</b></i></label></br>
+                <input class="form-control" required type="number" name="age" />
+            </div>
+            <div class="form-group">
+                <label><i><b>Ingrese su número de teléfono:</b></i></label></br>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="+xx xxx xxx xxxx" pattern="(\+?\d{1,3}[ -]?)?\d{9,14}" required>
+            </div>
+             <div class="form-group">
+                 <label><i><b>Ingrese una foto de perfil:</b></i></label></br>
+                 <input class="form-control" type="file" name="photo" required name="photo" />
+             </div>
             <div class="form-group">
                 <label><i><b>Ingrese su email:</b></i></label></br>
                 <input class="form-control" required type="email" name="email" />
@@ -36,7 +52,7 @@
             background-color: #c5c3c3;
             width: 800px;
             padding: 10px;
-            height: 300px;
+            height: 500px;
             display: flex;
             flex-direction: column;
             align-items: center;

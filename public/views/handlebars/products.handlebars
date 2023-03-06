@@ -1,0 +1,37 @@
+<div class="title-container">
+    <h1 id="title">Bienvenido {{{name}}}</h1>
+</div>
+<h2>Productos</h2>
+<div id="products-container">
+    {{#each PRODUCTS}}
+        <div class="product-item" id="{{id}}">
+            <p class="product-text">Nombre: {{name}}</p>
+            <p class="product-text">Precio: ${{precioKg}}</p>
+        </div>
+    {{/each}}
+</div>
+<script type="module" src="../../products.js"></script>
+
+<style>
+    .product-item {
+        width: 300px;
+        height: 60px;
+        padding-left: 10px;
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: white;
+        border-radius: 2rem;
+    }
+    .product-text {
+        margin: 0px 5px;
+        cursor: pointer;
+    }
+
+    h1 {
+        color: blue;
+    }
+
+
+</style>

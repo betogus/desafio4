@@ -1,77 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Api de Coderhouse</title>
-</head>
-<body>
-    <div class="title-container">
-        <h1 id="title">Bienvenido {{{name}}}</h1>
-        <a id="link" href='/logout'><button class='button' id="logoutBtn">Desloguear</button></a>
-    </div>
-    <h2>Productos</h2>
-    <h2>Ingresa un producto</h2>
-    <form id="productForm" action="/api/productos" enctype="multipart/form-data" method="post">
-        <label>Nombre</label>
-        <input type="text" name="title" />
-        <label>Precio</label>
-        <input type='number' name="price" />
-        <label>Ingrese una imagen del producto</label>
-        <input type='file' name="thumbnail" />
-        <input type="submit" />
-    </form>
-    <div id="table">
-        <p></p>
-    </div>
+<div class="title-container">
+    <h1 id="title">Bienvenido {{{name}}}</h1>
+</div>
+<h2>Productos</h2>
+<h2>Ingresa un producto</h2>
+<form id="productForm" action="/api/productos" enctype="multipart/form-data" method="post">
+    <label>Nombre</label>
+    <input type="text" name="title" />
+    <label>Precio</label>
+    <input type='number' name="price" />
+    <label>Ingrese una imagen del producto</label>
+    <input type='file' name="thumbnail" />
+    <input type="submit" />
+</form>
+<div id="table">
+    <p></p>
+</div>
 <script src="/socket.io/socket.io.js"></script>
-
-<script src="../../index.js"></script>
+<script src="../../dashboard.js"></script>
 
 <style>
     .table {
-    background-color: #1f1e1e;
-    color: #ffffff;
-    width: 400px;
-    padding: 10px;
-    text-align: center;
-    
+        background-color: #1f1e1e;
+        color: #ffffff;
+        width: 400px;
+        padding: 10px;
+        text-align: center;
+
     }
+
     .foto {
         object-fit: contain;
         max-width: 30px;
     }
+
     #button {
-            margin-top: 10px;
-            background: green;
-            color: #ffffff;
-            width: 80px;
-            height: 30px;
+        margin-top: 10px;
+        background: green;
+        color: #ffffff;
+        width: 80px;
+        height: 30px;
     }
+
     form {
         width: 400px;
         margin: 30px;
 
     }
+
     h1 {
         color: blue;
     }
+
     .form-container {
         display: flex;
         flex-direction: column;
     }
+
     .user {
         font-weight: bolder;
         color: blue;
     }
+
     .date {
         color: brown;
     }
+
     .message {
         color: green;
         font-style: italic;
     }
+
     .title-container {
         width: 500px;
         height: 50px;
@@ -83,6 +81,7 @@
         padding: 10px;
 
     }
+
     .button {
         background-color: #f7c203;
         border-width: 0ch;
@@ -93,13 +92,9 @@
         justify-content: center;
         align-items: center;
     }
+
     #link {
         text-decoration: none;
         color: #000000;
     }
-    
 </style>
-   
-    
-</body>
-</html>
