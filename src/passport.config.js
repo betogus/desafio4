@@ -19,6 +19,7 @@ export const initializePassport = () => {
                         username
                     })
                     if (user) return done(null, false) 
+                    
                     const newUser = {
                         username,
                         password: createHash(password),
@@ -46,6 +47,7 @@ export const initializePassport = () => {
         new LocalStrategy(
             async (username, password, done) => {
                 try {
+                    
                     let user = await users.findOne({ username })
                     if (!user) return done(null, false)
                     if (!isValid(user, password)) return done(null, false)

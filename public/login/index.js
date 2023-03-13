@@ -5,7 +5,7 @@ btn.addEventListener('click', evt => {
     let form = document.getElementById('loginForm')
     let data = new FormData(form)
     data.forEach((value, key) => sendObject[key] = value)
-    fetch('/login', {
+    fetch('/auth/login', {
         method: "POST",
         body: JSON.stringify(sendObject),
         headers: {

@@ -9,7 +9,7 @@
 <body class="body">
     <div class="container">
         <h1>Login de Usuario</h1>
-        <form autocomplete="off" action="/login" role="form" id='loginForm' method="post">
+        <form autocomplete="off" action="/auth/login" role="form" id='loginForm' method="post">
             <div class="form-group">
                 <label><i><b>Ingrese su nombre:</b></i></label></br>
                 <input class="form-control" required type="text" name="username" />
@@ -22,7 +22,7 @@
                 <input class="btn btn-primary" id="loginBtn" type="submit" value="Enviar" />
             </div>
         </form>
-        <button id="registerBtn" class="btn" onclick="location.href = '/register'">Registrarse</button>
+        <button id="registerBtn" class="btn" onclick="location.href = '/auth/register'">Registrarse</button>
     </div>
     <style>
         .container {

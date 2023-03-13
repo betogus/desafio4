@@ -11,7 +11,7 @@
 <body class="body">
     <div class="container">
         <h1>Registro Usuario</h1>
-        <form autocomplete="off" action="/register" role="form" id='registerForm' method="post" enctype="multipart/form-data" >
+        <form autocomplete="off" action="/auth/register" role="form" id='registerForm' method="post" enctype="multipart/form-data" >
             <div class="form-group">
                 <label><i><b>Ingrese su nombre:</b></i></label></br>
                 <input class="form-control" required type="text" name="username" />
@@ -44,7 +44,7 @@
                 <input class="btn btn-primary" id="registerBtn" type="submit" value="Enviar" />
             </div>
         </form>
-        <button id="loginBtn" class="btn" onclick="location.href = '/login'">Loguearse</button>
+        <button id="loginBtn" class="btn" onclick="location.href = '/auth/login'">Loguearse</button>
     </div>
     
     <style>
