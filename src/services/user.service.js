@@ -10,4 +10,5 @@ export async function obtenerUsuario(userId, callback) {
         age: user.age,
         phone: user.phone
     }
-}
+} 
+

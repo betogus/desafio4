@@ -13,10 +13,10 @@ router.use(passport.session())
 //REGISTER
 
 router.get("/register", getRegistro);
-router.post('/register', passport.authenticate('register', {
+router.post('/register', /*  passport.authenticate('register', {
     failureRedirect: '/auth/failregister',
     successRedirect: '/auth/products'
-}), postRegistro)
+}), */ postRegistro)
 router.get('/failregister', failRegistro)
 
 
@@ -25,7 +25,7 @@ router.get('/failregister', failRegistro)
 router.get('/', redirectLogin);
 router.get("/login", getLogin);
 router.get('/faillogin', failLogin)
-router.post('/login', (req, res, next) => {
+router.post('/login', /* (req, res, next) => {
     passport.authenticate('login', (err, user, info) => {
         if (err) {
             console.error(err);
@@ -43,6 +43,6 @@ router.post('/login', (req, res, next) => {
             return next();
         });
     })(req, res, next);
-}, postLogin);
+}, */ postLogin);
 
 export default router
