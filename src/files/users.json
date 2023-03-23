@@ -6,5 +6,37 @@
 		"phone": "123123123",
 		"email": "asd@asd.com",
 		"password": "123"
+	},
+	{
+		"username": "Beto",
+		"address": "Calle falsa 123",
+		"age": 28,
+		"phone": "123123123",
+		"email": "gus@hotmail.com",
+		"password": "123"
+	},
+	{
+		"username": "Rodrigo",
+		"address": "Calle falsa 123",
+		"age": 28,
+		"phone": "123123123",
+		"email": "gus@hotmail.com",
+		"password": "123"
+	},
+	{
+		"username": "Nico",
+		"address": "Calle falsa 123",
+		"age": 28,
+		"phone": "123123123",
+		"email": "gus@hotmail.com",
+		"password": "123"
+	},
+	{
+		"username": "Benja",
+		"address": "Calle falsa 123",
+		"age": 28,
+		"phone": "123123123",
+		"email": "gus@hotmail.com",
+		"password": "123"
 	}
 ]

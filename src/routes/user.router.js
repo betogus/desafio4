@@ -4,6 +4,6 @@ import { isAuth } from "../middlewares/auth.middleware.js";
 
 const router = Router()
 
-router.get('/', isAuth, getUser)
+router.get('/', /* isAuth, */ getUser)
 
 export default router

@@ -40,31 +40,35 @@ export const failLogin = async (req, res) => {
 
 
 export const postLogin = async (req, res) => {
-    logger.info(`Ruta: /user. Método: POST`)
+    logger.info(`Ruta: /login. Método: POST`)
     let {username, password } = req.body
     //const userId = req.session.passport.user;
+    const result = await authService.authUser(username, password)
     try {
-        const user = await authService.authUser(username, password)
-        let userDTO = new UserDTO(user)
+        console.log("try")
+        let userDTO = new UserDTO(result)
         req.session.user = userDTO //Almacenamos el usuario para usarlo en isAuth()
         res.cookie('user', userDTO)
-        res.redirect('/products') 
+        //res.redirect('/products')
+        res.send(result)
     } catch (err) {
-        failLogin(req, res)
-    }  
+        //failLogin(req, res)
+        res.send(result)
+    }
 }
 
 export const postRegistro = async (req, res) => {
-    logger.info(`Ruta: /user. Método: POST`)
+    logger.info(`Ruta: /register. Método: POST`)
     let user = req.body
-    console.log("user", user)
     try {
-        await authService.addUser(user)
+        let result = await authService.addUser(user, res)
         let userDTO = new UserDTO(user)
         req.session.user = userDTO //Almacenamos el usuario para usarlo en isAuth()
         res.cookie('user', userDTO)
-        res.redirect('/products')
+        //res.redirect('/products')
+        res.send(result)
      } catch (err) {
-        failRegistro(req, res)
+        //failRegistro(req, res)
+        res.send(err)
     } 
 }

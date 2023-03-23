@@ -23,15 +23,14 @@ export default class AuthDaoFile {
     authUser = async (username, password) => {
         let users = await this.#readFile()
         let user = users.find(item => item.username === username)
-        if (user.password === password) return user
-        else return { status: 400, message: "El usuario y/o contraseña no coinciden" }
+        if (!user || user.password !== password) return { status: 401, message: "El usuario y/o contraseña no coinciden" }
+        return user
     }
 
     addUser = async(user) => {
         let users = await this.#readFile()
         let findUser = users.find(item => item.username === user.username)
-        console.log(user)
-        if (findUser) return {status:400, message: "Ya existe un usuario con ese nombre"}
+        if (findUser) return {status:401, message: "Ya existe un usuario con ese nombre"}
         else {
             users.push(user)
             await fs.promises.writeFile(this.path, JSON.stringify(users, null, '\t'))

@@ -1,4 +1,3 @@
-import { obtenerUsuario } from "../services/user.service.js";
 import { logger } from "../winston/winston.js";
 
 
