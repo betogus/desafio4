@@ -3,13 +3,14 @@
 </div>
 <h2>Productos</h2>
 <div id="products-container">
-    {{#each PRODUCTS}}
+    {{#each products}}
         <div class="product-item" id="{{id}}">
             <p class="product-text">Nombre: {{name}}</p>
             <p class="product-text">Precio: ${{precioKg}}</p>
         </div>
     {{/each}}
 </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="module" src="../../products.js"></script>
 
 <style>

@@ -25,6 +25,12 @@ class Products {
         return product
     }
 
+    noHayStock(id) {
+        let index = this.products.findIndex(item => item.id === id)
+            if (index === -1) return {message: "No hubo coincidencias"}
+        this.products[index].hayStock = false
+        return this.products[index]
+    }
     update(product) {
         if (product.name && product.precio100gr && product.precioKg && product.hayStock && product.categoryId) {
             let productUpdated = this.products.find(item => item.id === product.id)

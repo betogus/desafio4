@@ -8,7 +8,6 @@ export const getLogout = async (req, res) => {
     try {
         //const userName = await obtenerNombreUsuario(userId)
         const user = req.session?.user || req.cookies?.user
-        console.log(user.username)
         res.render('logout', {name: user.username});
 
     } catch (err) {
